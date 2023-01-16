@@ -1,0 +1,26 @@
+.upward{
+    position: absolute;
+    margin: 6px;
+    font-weight: 500;
+    font-family: "inter";
+}
+.select-market{
+    font-size: 40px !important;
+}
+#chartDiv{
+    width: 100%;
+    height: 60vh;
+
+}
+.chart1{
+  flex:0.4 !important;
+}
+.chart2{
+    flex:0.6 !important;
+}
+.padding-top0{
+    padding-top: 0px;
+}
+.margintop5vw{
+    margin-top: 5vw;
+}

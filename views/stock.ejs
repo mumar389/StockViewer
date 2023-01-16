@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Finance Rounded Candlestick Volume Chart | JSCharting</title>
+  <meta http-equiv="content-type" content="text-html; charset=utf-8" />
+
+  <script type="text/javascript" src="../jsc/jscharting.js"></script>
+
+  <script type="text/javascript" src="../jsc/modules/toolbar.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="css/default.css" />
+  <link rel="stylesheet" href="/chart.css" />
+  <link rel="stylesheet" href="/toggle.css" />
+  <link rel="stylesheet" type="text/css" href="/navbar.css" />
+  <link rel="stylesheet" type="text/css" href="/footer.css" />
+
+  <style></style>
+</head>
+
+<body>
+  <!-- navbar  -->
+  <div class="navbar">
+    <div class="logo ">
+      <img class="logo-img" src="/Logo.png" alt="photo">
+    </div>
+
+    <div class="navbar-headings">
+      <ul>
+        <li><a href="#"> About</a></li>
+        <li><a href="#"> Contact us</a></li>
+        <li><a href="#">lorem</a></li>
+        <li><a href="mailto:kartikey000k@gmail.com">Email us</a></li>
+
+      </ul>
+    </div>
+
+    <div class="navbar-button">
+       <%if(!(locals.user)){%>
+      <a href="/"><button class="green-button inter">Login/Signup</button></a>
+      <%} else{%>
+        <p>Welcome <a href="/users/" style="text-decoration: none; color: black;"> <%=locals.user.name%></a>
+      <a href="/users/sign-out"><button class="green-button inter">Logout</button></a> </p>
+        <%}%>
+    </div>
+  </div>
+
+  <!--navbarEnd-------------------------------------------->
+
+  <div id="chartDiv" style="max-width: 1240px;height: 450px;margin: 0px auto;"></div>
+
+  <div class="current">
+    <p></p>
+
+  </div>
+
+  <!-- -footer--------------------------------------------------->
+  <div class="foo-ter">
+    <footer class="footer">
+      <div class="footer__addr">
+        <h1 class="footer__logo"><img src="/Logo.png" alt="logo"></h1>
+
+        <h2>Contact</h2>
+
+        <address>
+          Amber 123 dhanbad IIT ISM<br>
+
+          <a class="footer__btn" href="mailto:kartikey000k@gmail.com">Email Us</a>
+        </address>
+      </div>
+
+      <ul class="footer__nav">
+        <li class="nav__item">
+          <h2 class="nav__title">Media</h2>
+
+          <ul class="nav__ul">
+            <li>
+              <a href="#">Online</a>
+            </li>
+
+            <li>
+              <a href="#">Print</a>
+            </li>
+
+            <li>
+              <a href="#">Alternative Ads</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav__item nav__item--extra">
+          <h2 class="nav__title">Features</h2>
+
+          <ul class="nav__ul nav__ul--extra">
+            <li>
+              <a href="#">Real time data </a>
+            </li>
+
+            <li>
+              <a href="#">Market trends</a>
+            </li>
+
+            <li>
+              <a href="#">Bombay stock exchange</a>
+            </li>
+
+            <li>
+              <a href="#">National stock exchange</a>
+            </li>
+
+            <!-- <li>
+                        <a href="#">Artificial Intelligence</a>
+                      </li>
+
+                      <li>
+                        <a href="#">IoT</a>
+                      </li> -->
+          </ul>
+        </li>
+
+        <li class="nav__item">
+          <h2 class="nav__title">Legal</h2>
+
+          <ul class="nav__ul">
+            <li>
+              <a href="#">Privacy Policy</a>
+            </li>
+
+            <li>
+              <a href="#">Terms of Use</a>
+            </li>
+
+            <li>
+              <a href="#">Sitemap</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <div class="legal">
+        <p>&copy; 2023 Something. All rights reserved.</p>
+
+
+      </div>
+    </footer>
+  </div>
+
+  <!------------------------------------------------------------------>
+
+  <script src="https://code.jscharting.com/latest/jscharting.js"></script>
+  <script type="text/javascript">
+    /*
+A rounded candlestick chart with volume, zooming, and y axis crosshair.
+Learn how to:
+
+  - Draw a rounded finance candlestick chart.
+*/
+    // JS
+    
+    let temp= fetch('http://localhost:6900/<%= company%>')
+    .then((value1)=>{
+      console.log(value1.status);
+      console.log(value1.ok);
+      return value1.json()
+    })
+    .then((data)=>{
+      initChart(
+        data.map(function(entry) {
+          return {
+            x: entry.Date,
+            open: entry.Open,
+            high: entry.High,
+            low: entry.Low,
+            close: entry.Close
+          };
+        }),
+        data.map(function(entry) {
+          return {
+            x: entry.Date,
+            y: entry.Volume
+          };
+        })
+      );
+    })
+
+    // JSC.fetch('./google.csv')
+    //   .then(function(response) {
+    //     return response.text();
+    //   })
+    //   .then(function(text) {
+    //     var data = JSC.csv2Json(text);
+    //
+    //
+    //     initChart(
+    //       data.map(function(entry) {
+    //         return {
+    //           x: entry.Date,
+    //           open: entry.Open,
+    //           high: entry.High,
+    //           low: entry.Low,
+    //           close: entry.Close
+    //         };
+    //       }),
+    //       data.map(function(entry) {
+    //         return {
+    //           x: entry.Date,
+    //           y: entry.Volume
+    //         };
+    //       })
+    //     );
+    //   });
+
+    function initChart(points, volumePoints) {
+      var chart = JSC.chart('chartDiv', {
+        debug: true,
+        type: 'candlestick',
+        axisToZoom: 'x',
+        legend: {
+          template: '%icon %name',
+          position: 'inside top left'
+        },
+        palette: 1,
+        yAxis: [{
+            id: 'yMain',
+            formatString: 'c',
+            crosshair_enabled: true,
+            orientation: 'opposite',
+            scale: {
+              range_padding: 0.1
+            }
+          },
+          {
+            id: 'yVol',
+            visible: false,
+            scale: {
+              syncWith: 'none',
+              range: {
+                padding: 1.5,
+                min: 0
+              }
+            }
+          }
+        ],
+        xAxis: {
+          scale_type: 'time'
+        },
+        defaultPoint_radius: 100,
+        series: [{
+            name: 'Volume',
+            type: 'column',
+            yAxis: 'yVol',
+            defaultPoint: {
+              opacity: 0.2
+            },
+            points: volumePoints
+          },
+          {
+            yAxis: 'yMain',
+            name: 'GOOGL Weekly',
+            points: points
+          }
+        ]
+      });
+    }
+
+    function tooltip(point) {
+      var color = point.options('close') > point.options('open') ? 'green' : 'red';
+      return (
+        'Change: <span style="color:' +
+        color +
+        '"><b>{%close-%open}</b></span><br>Open: %open<br/>High: %high<br/>Low: %low<br/>Close: %close'
+      );
+    }
+  </script>
+</body>
+
+</html>
