@@ -67,9 +67,18 @@ module.exports.ashokley=async(req,res)=>{
     if(!(req.isAuthenticated())){
         return res.redirect('/');
     }
+    var last = result.length;
+    var current = result[last - 1];
+    console.log(current);
    return res.render('stock', {
-        company: "ashokleyland",
-      });
+    company: "ashokleyland",
+    current_Date: current.Date,
+    current_High: current.High,
+    current_Low: current.Low,
+    current_Close: current.Close,
+    current_Open: current.Open,
+    current_Adj_Close: current.Adj_Close,
+    });
 }
 module.exports.cipla=async(req,res)=>{
     if(!(req.isAuthenticated())){
