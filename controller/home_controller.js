@@ -87,49 +87,115 @@ module.exports.cipla=async(req,res)=>{
     if(!(req.isAuthenticated())){
         return res.redirect('/');
     }
-   return res.render('stock', {
-        company: "cipla"
-      });
+    Cipla.find({}, (err, result) => {
+        var last = result.length;
+        var current = result[last - 1];
+        console.log(current);
+       return res.render('stock', {
+        company: "cipla",
+        current_Date: current.Date,
+        current_High: current.High,
+        current_Low: current.Low,
+        current_Close: current.Close,
+        current_Open: current.Open,
+        current_Adj_Close: current.Adj_Close,
+        });
+       })
 }
 module.exports.eicher=async(req,res)=>{
     if(!(req.isAuthenticated())){
         return res.redirect('/');
     }
-   return res.render('stock', {
-        company: "eicher"
-      });
+    eicher.find({}, (err, result) => {
+        var last = result.length;
+        var current = result[last - 1];
+        console.log(current);
+       return res.render('stock', {
+        company: "eicher",
+        current_Date: current.Date,
+        current_High: current.High,
+        current_Low: current.Low,
+        current_Close: current.Close,
+        current_Open: current.Open,
+        current_Adj_Close: current.Adj_Close,
+        });
+       })
 }
 module.exports.relicance=async(req,res)=>{
     if(!(req.isAuthenticated())){
         return res.redirect('/');
     }
-    return res.render('stock', {
-        company: "reliance"
-      });
+    Reliance.find({}, (err, result) => {
+        var last = result.length;
+        var current = result[last - 1];
+        console.log(current);
+       return res.render('stock', {
+        company: "reliance",
+        current_Date: current.Date,
+        current_High: current.High,
+        current_Low: current.Low,
+        current_Close: current.Close,
+        current_Open: current.Open,
+        current_Adj_Close: current.Adj_Close,
+        });
+       })
 }
 module.exports.tatasteel=async(req,res)=>{
     if(!(req.isAuthenticated())){
         return res.redirect('/');
     }
-    return res.render('stock', {
-        company: "tatasteel"
-      });
+    Tata_Steel.find({}, (err, result) => {
+        var last = result.length;
+        var current = result[last - 1];
+        console.log(current);
+       return res.render('stock', {
+        company: "tatasteel",
+        current_Date: current.Date,
+        current_High: current.High,
+        current_Low: current.Low,
+        current_Close: current.Close,
+        current_Open: current.Open,
+        current_Adj_Close: current.Adj_Close,
+        });
+       })
 }
 
 module.exports.nse=async(req,res)=>{
     if(!(req.isAuthenticated())){
         return res.redirect('/');
     }
-    return res.render('stock', {
-        company: "nse"
-      });
+    Nse.find({}, (err, result) => {
+        var last = result.length;
+        var current = result[last - 1];
+        console.log(current);
+       return res.render('stock', {
+        company: "nse",
+        current_Date: current.Date,
+        current_High: current.High,
+        current_Low: current.Low,
+        current_Close: current.Close,
+        current_Open: current.Open,
+        current_Adj_Close: current.Adj_Close,
+        });
+       })
 }
 module.exports.bse=async(req,res)=>{
     if(!(req.isAuthenticated())){
         return res.redirect('/');
     }
-    return res.render('stock', {
-        company: "bse"
-      });
+    Bse.find({}, (err, result) => {
+        var last = result.length;
+        var current = result[last - 1];
+        console.log(current);
+       return res.render('stock', {
+        company: "bse",
+        current_Date: current.Date,
+        current_High: current.High,
+        current_Low: current.Low,
+        current_Close: current.Close,
+        current_Open: current.Open,
+        current_Adj_Close: current.Adj_Close,
+        });
+       })
 }
 
