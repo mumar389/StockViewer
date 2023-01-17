@@ -106,7 +106,7 @@ module.exports.eicher=async(req,res)=>{
     if(!(req.isAuthenticated())){
         return res.redirect('/');
     }
-    eicher.find({}, (err, result) => {
+    Eicher.find({}, (err, result) => {
         var last = result.length;
         var current = result[last - 1];
         console.log(current);
