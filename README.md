@@ -63,6 +63,8 @@ To run this project, you will need to add the following environment variables to
 
 <img width="1426" alt="Screenshot 2023-01-17 at 12 43 01 AM" src="https://user-images.githubusercontent.com/88922921/212751331-483a0b05-b7ea-4bb3-afb9-873b6cf635fc.png">
 
+<img width="1422" alt="Screenshot 2023-01-17 at 10 50 49 AM" src="https://user-images.githubusercontent.com/88922921/212816376-c8ba3ece-d954-44e4-9dc1-fe709a9bf91a.png">
+
 
 ## Support
 
